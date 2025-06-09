@@ -1,3 +1,5 @@
+#include "/home/bala/cd-lab/runtime/runtime.h"
+
 int square(int x) {
     return x * x;
 }
