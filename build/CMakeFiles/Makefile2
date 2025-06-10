@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bala/cd-lab/cd-lab-master
+CMAKE_SOURCE_DIR = /home/bala/cd-lab
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bala/cd-lab/cd-lab-master/build
+CMAKE_BINARY_DIR = /home/bala/cd-lab/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -100,14 +100,14 @@ tool/clean: tool/CMakeFiles/cd_lab_instrumentor.dir/clean
 tool/CMakeFiles/intrinsics_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/intrinsics_gen.dir/build.make tool/CMakeFiles/intrinsics_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/intrinsics_gen.dir/build.make tool/CMakeFiles/intrinsics_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/cd-lab-master/build/CMakeFiles --progress-num= "Built target intrinsics_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/build/CMakeFiles --progress-num= "Built target intrinsics_gen"
 .PHONY : tool/CMakeFiles/intrinsics_gen.dir/all
 
 # Build rule for subdir invocation for target.
 tool/CMakeFiles/intrinsics_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tool/CMakeFiles/intrinsics_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 .PHONY : tool/CMakeFiles/intrinsics_gen.dir/rule
 
 # Convenience name for target.
@@ -126,14 +126,14 @@ tool/CMakeFiles/intrinsics_gen.dir/clean:
 tool/CMakeFiles/omp_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/omp_gen.dir/build.make tool/CMakeFiles/omp_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/omp_gen.dir/build.make tool/CMakeFiles/omp_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/cd-lab-master/build/CMakeFiles --progress-num= "Built target omp_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/build/CMakeFiles --progress-num= "Built target omp_gen"
 .PHONY : tool/CMakeFiles/omp_gen.dir/all
 
 # Build rule for subdir invocation for target.
 tool/CMakeFiles/omp_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tool/CMakeFiles/omp_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 .PHONY : tool/CMakeFiles/omp_gen.dir/rule
 
 # Convenience name for target.
@@ -152,14 +152,14 @@ tool/CMakeFiles/omp_gen.dir/clean:
 tool/CMakeFiles/acc_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/acc_gen.dir/build.make tool/CMakeFiles/acc_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/acc_gen.dir/build.make tool/CMakeFiles/acc_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/cd-lab-master/build/CMakeFiles --progress-num= "Built target acc_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/build/CMakeFiles --progress-num= "Built target acc_gen"
 .PHONY : tool/CMakeFiles/acc_gen.dir/all
 
 # Build rule for subdir invocation for target.
 tool/CMakeFiles/acc_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tool/CMakeFiles/acc_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 .PHONY : tool/CMakeFiles/acc_gen.dir/rule
 
 # Convenience name for target.
@@ -178,14 +178,14 @@ tool/CMakeFiles/acc_gen.dir/clean:
 tool/CMakeFiles/clang-tablegen-targets.dir/all:
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/clang-tablegen-targets.dir/build.make tool/CMakeFiles/clang-tablegen-targets.dir/depend
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/clang-tablegen-targets.dir/build.make tool/CMakeFiles/clang-tablegen-targets.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/cd-lab-master/build/CMakeFiles --progress-num= "Built target clang-tablegen-targets"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/build/CMakeFiles --progress-num= "Built target clang-tablegen-targets"
 .PHONY : tool/CMakeFiles/clang-tablegen-targets.dir/all
 
 # Build rule for subdir invocation for target.
 tool/CMakeFiles/clang-tablegen-targets.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tool/CMakeFiles/clang-tablegen-targets.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 .PHONY : tool/CMakeFiles/clang-tablegen-targets.dir/rule
 
 # Convenience name for target.
@@ -204,14 +204,14 @@ tool/CMakeFiles/clang-tablegen-targets.dir/clean:
 tool/CMakeFiles/cd_lab_instrumentor.dir/all:
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/cd_lab_instrumentor.dir/build.make tool/CMakeFiles/cd_lab_instrumentor.dir/depend
 	$(MAKE) $(MAKESILENT) -f tool/CMakeFiles/cd_lab_instrumentor.dir/build.make tool/CMakeFiles/cd_lab_instrumentor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/cd-lab-master/build/CMakeFiles --progress-num=1,2 "Built target cd_lab_instrumentor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bala/cd-lab/build/CMakeFiles --progress-num=1,2 "Built target cd_lab_instrumentor"
 .PHONY : tool/CMakeFiles/cd_lab_instrumentor.dir/all
 
 # Build rule for subdir invocation for target.
 tool/CMakeFiles/cd_lab_instrumentor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tool/CMakeFiles/cd_lab_instrumentor.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/cd-lab-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bala/cd-lab/build/CMakeFiles 0
 .PHONY : tool/CMakeFiles/cd_lab_instrumentor.dir/rule
 
 # Convenience name for target.

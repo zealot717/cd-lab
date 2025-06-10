@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <set>
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
 #include "clang/Frontend/FrontendActions.h"
@@ -20,21 +21,50 @@ class InstrumentorCallback : public MatchFinder::MatchCallback {
 public:
     InstrumentorCallback(Rewriter &R) : TheRewriter(R) {}
 
-    virtual void run(const MatchFinder::MatchResult &Result) {
-        if (const FunctionDecl *Func = Result.Nodes.getNodeAs<FunctionDecl>("funcDecl")) {
-            if (!Func->hasBody() || Func->isMain()) return;
+    void run(const MatchFinder::MatchResult &Result) override {
+        const FunctionDecl *Func = Result.Nodes.getNodeAs<FunctionDecl>("funcDecl");
+        if (!Func || !Func->hasBody() || Func->isMain()) return;
 
-            const Stmt *Body = Func->getBody();
-            SourceManager &SM = *Result.SourceManager;
+        const Stmt *Body = Func->getBody();
+        SourceManager &SM = *Result.SourceManager;
 
-            std::string FuncName = Func->getNameInfo().getName().getAsString();
-            std::string entryCall = "runtime_function_entry(\"" + FuncName + "\");\n";
-            std::string exitCall = "runtime_function_exit(\"" + FuncName + "\");\n";
+        std::string FuncName = Func->getNameInfo().getName().getAsString();
+        std::string entryCall = "runtime_function_entry(\"" + FuncName + "\");\n";
+        std::string exitCall = "runtime_function_exit(\"" + FuncName + "\");\n";
 
-            SourceLocation StartLoc = Body->getBeginLoc().getLocWithOffset(1);
-            TheRewriter.InsertText(StartLoc, entryCall, true, true);
+        // Insert entry at beginning of body
+        SourceLocation StartLoc = Body->getBeginLoc().getLocWithOffset(1);
+        TheRewriter.InsertText(StartLoc, entryCall, true, true);
 
-            // Insert exit before the final closing brace
+        // Visit returns and insert exit before each
+        class ReturnVisitor : public RecursiveASTVisitor<ReturnVisitor> {
+        public:
+            ReturnVisitor(Rewriter &R, const std::string &exitCall, SourceManager &SM)
+                : TheRewriter(R), ExitCall(exitCall), SM(SM) {}
+
+            bool VisitReturnStmt(ReturnStmt *Ret) {
+                SourceLocation RetLoc = Ret->getBeginLoc();
+                if (RetLoc.isValid() && !SM.isInSystemHeader(RetLoc)) {
+                    TheRewriter.InsertText(RetLoc, ExitCall, true, true);
+                    FoundReturn = true;
+                }
+                return true;
+            }
+
+            bool foundReturn() const { return FoundReturn; }
+
+        private:
+            Rewriter &TheRewriter;
+            const std::string &ExitCall;
+            SourceManager &SM;
+            bool FoundReturn = false;
+        };
+
+        ReturnVisitor visitor(TheRewriter, exitCall, SM);
+        visitor.TraverseStmt(const_cast<Stmt*>(Body));
+
+        // If no return was found, insert exit before final closing brace
+        if (!visitor.foundReturn()) {
             if (const CompoundStmt *Compound = dyn_cast<CompoundStmt>(Body)) {
                 SourceLocation EndLoc = Compound->getRBracLoc();
                 TheRewriter.InsertTextBefore(EndLoc, exitCall);
@@ -49,7 +79,10 @@ private:
 class InstrumentorASTConsumer : public ASTConsumer {
 public:
     InstrumentorASTConsumer(Rewriter &R) : Handler(R) {
-        Matcher.addMatcher(functionDecl(isDefinition(), unless(isExpansionInSystemHeader())).bind("funcDecl"), &Handler);
+        Matcher.addMatcher(
+            functionDecl(isDefinition(), unless(isExpansionInSystemHeader())).bind("funcDecl"),
+            &Handler
+        );
     }
 
     void HandleTranslationUnit(ASTContext &Context) override {

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/bala/cd-lab/cd-lab-master/tool/Instrumentor.cpp" "tool/CMakeFiles/cd_lab_instrumentor.dir/Instrumentor.cpp.o" "gcc" "tool/CMakeFiles/cd_lab_instrumentor.dir/Instrumentor.cpp.o.d"
+  "/home/bala/cd-lab/tool/Instrumentor.cpp" "tool/CMakeFiles/cd_lab_instrumentor.dir/Instrumentor.cpp.o" "gcc" "tool/CMakeFiles/cd_lab_instrumentor.dir/Instrumentor.cpp.o.d"
   )
 
 # Targets to which this target links.

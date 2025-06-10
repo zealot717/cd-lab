@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bala/cd-lab/cd-lab-master
+CMAKE_SOURCE_DIR = /home/bala/cd-lab
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bala/cd-lab/cd-lab-master/build
+CMAKE_BINARY_DIR = /home/bala/cd-lab/build
 
 # Utility rule file for intrinsics_gen.
 
@@ -74,10 +74,10 @@ tool/CMakeFiles/intrinsics_gen.dir/build: intrinsics_gen
 .PHONY : tool/CMakeFiles/intrinsics_gen.dir/build
 
 tool/CMakeFiles/intrinsics_gen.dir/clean:
-	cd /home/bala/cd-lab/cd-lab-master/build/tool && $(CMAKE_COMMAND) -P CMakeFiles/intrinsics_gen.dir/cmake_clean.cmake
+	cd /home/bala/cd-lab/build/tool && $(CMAKE_COMMAND) -P CMakeFiles/intrinsics_gen.dir/cmake_clean.cmake
 .PHONY : tool/CMakeFiles/intrinsics_gen.dir/clean
 
 tool/CMakeFiles/intrinsics_gen.dir/depend:
-	cd /home/bala/cd-lab/cd-lab-master/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bala/cd-lab/cd-lab-master /home/bala/cd-lab/cd-lab-master/tool /home/bala/cd-lab/cd-lab-master/build /home/bala/cd-lab/cd-lab-master/build/tool /home/bala/cd-lab/cd-lab-master/build/tool/CMakeFiles/intrinsics_gen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/bala/cd-lab/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bala/cd-lab /home/bala/cd-lab/tool /home/bala/cd-lab/build /home/bala/cd-lab/build/tool /home/bala/cd-lab/build/tool/CMakeFiles/intrinsics_gen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : tool/CMakeFiles/intrinsics_gen.dir/depend
 

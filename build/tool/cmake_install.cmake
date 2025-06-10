@@ -1,4 +1,4 @@
-# Install script for directory: /home/bala/cd-lab/cd-lab-master/tool
+# Install script for directory: /home/bala/cd-lab/tool
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,9 +1,21 @@
 #include "/home/bala/cd-lab/runtime/runtime.h"
 
-int square(int x) {runtime_function_entry("square");
+int square(int n) {runtime_function_entry("square");
 
-    return x * x;
-runtime_function_exit("square");
+    
+
+    int sum;
+    if(n>2)
+     runtime_function_exit("square");
+     return 0;
+    for(int i=0;i<1000;i++)
+     sum+=0;
+    runtime_function_exit("square");
+    return sum;
+
+
+    
+     
 }
 
 int main() {

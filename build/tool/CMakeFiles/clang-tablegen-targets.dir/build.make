@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bala/cd-lab/cd-lab-master
+CMAKE_SOURCE_DIR = /home/bala/cd-lab
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bala/cd-lab/cd-lab-master/build
+CMAKE_BINARY_DIR = /home/bala/cd-lab/build
 
 # Utility rule file for clang-tablegen-targets.
 
@@ -74,10 +74,10 @@ tool/CMakeFiles/clang-tablegen-targets.dir/build: clang-tablegen-targets
 .PHONY : tool/CMakeFiles/clang-tablegen-targets.dir/build
 
 tool/CMakeFiles/clang-tablegen-targets.dir/clean:
-	cd /home/bala/cd-lab/cd-lab-master/build/tool && $(CMAKE_COMMAND) -P CMakeFiles/clang-tablegen-targets.dir/cmake_clean.cmake
+	cd /home/bala/cd-lab/build/tool && $(CMAKE_COMMAND) -P CMakeFiles/clang-tablegen-targets.dir/cmake_clean.cmake
 .PHONY : tool/CMakeFiles/clang-tablegen-targets.dir/clean
 
 tool/CMakeFiles/clang-tablegen-targets.dir/depend:
-	cd /home/bala/cd-lab/cd-lab-master/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bala/cd-lab/cd-lab-master /home/bala/cd-lab/cd-lab-master/tool /home/bala/cd-lab/cd-lab-master/build /home/bala/cd-lab/cd-lab-master/build/tool /home/bala/cd-lab/cd-lab-master/build/tool/CMakeFiles/clang-tablegen-targets.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/bala/cd-lab/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bala/cd-lab /home/bala/cd-lab/tool /home/bala/cd-lab/build /home/bala/cd-lab/build/tool /home/bala/cd-lab/build/tool/CMakeFiles/clang-tablegen-targets.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : tool/CMakeFiles/clang-tablegen-targets.dir/depend
 

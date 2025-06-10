@@ -1,7 +1,18 @@
 #include "/home/bala/cd-lab/runtime/runtime.h"
 
-int square(int x) {
-    return x * x;
+int square(int n) {
+    
+
+    int sum;
+    if(n>2)
+     return 0;
+    for(int i=0;i<1000;i++)
+     sum+=0;
+    return sum;
+
+
+    
+     
 }
 
 int main() {

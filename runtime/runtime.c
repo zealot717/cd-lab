@@ -70,7 +70,7 @@ void init_papi() {
 
 void runtime_function_entry(const char* func_name) {
     init_papi();
-
+    printf("[ENTRY] %s\n", func_name);
     thread_func_name = func_name;
     clock_gettime(CLOCK_MONOTONIC, &thread_start_time);
     if (PAPI_start(event_set) != PAPI_OK) {
@@ -82,8 +82,9 @@ void runtime_function_entry(const char* func_name) {
 }
 
 void runtime_function_exit(const char* func_name) {
+    printf("[EXIT] %s\n", func_name);
     if (!initialized) return;
-
+    
     long long end_values[MAX_EVENTS];
     struct timespec end_time;
     clock_gettime(CLOCK_MONOTONIC, &end_time);
@@ -93,6 +94,7 @@ void runtime_function_exit(const char* func_name) {
     }
 
     if (log_index < MAX_FUNCS) {
+        //printf("[LOGGING] %s from %.9f to %.9f\n", func_name, f->start_time, f->end_time);
         FunctionCall* f = &logs[log_index++];
         snprintf(f->func_name, MAX_NAME_LEN, "%s", thread_func_name);
         f->start_time = get_time_in_seconds(&thread_start_time);
