@@ -1,2 +1,2 @@
-function_name,start_timestamp,end_timestamp,PAPI_TOT_INS,PAPI_L1_DCM
-square,3932.344393490,3932.344398904,1236,35
+function_name,start_timestamp,end_timestamp,PAPI_L1_DCM,PAPI_TOT_CYC
+square,5446.852548240,5446.852570939,5,971

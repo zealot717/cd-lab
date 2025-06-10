@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <set>
+
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
 #include "clang/Frontend/FrontendActions.h"
@@ -10,12 +11,14 @@
 #include "clang/AST/RecursiveASTVisitor.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
+#include "llvm/Support/CommandLine.h"
 
 using namespace clang;
 using namespace clang::tooling;
 using namespace clang::ast_matchers;
 
 static llvm::cl::OptionCategory ToolCategory("cd-lab instrumentation options");
+static llvm::cl::opt<std::string> TraceEvents("trace-papi-events", llvm::cl::desc("Comma-separated list of PAPI events to trace"), llvm::cl::init("PAPI_TOT_INS,PAPI_L1_DCM"), llvm::cl::cat(ToolCategory));
 
 class InstrumentorCallback : public MatchFinder::MatchCallback {
 public:
@@ -32,11 +35,9 @@ public:
         std::string entryCall = "runtime_function_entry(\"" + FuncName + "\");\n";
         std::string exitCall = "runtime_function_exit(\"" + FuncName + "\");\n";
 
-        // Insert entry at beginning of body
         SourceLocation StartLoc = Body->getBeginLoc().getLocWithOffset(1);
         TheRewriter.InsertText(StartLoc, entryCall, true, true);
 
-        // Visit returns and insert exit before each
         class ReturnVisitor : public RecursiveASTVisitor<ReturnVisitor> {
         public:
             ReturnVisitor(Rewriter &R, const std::string &exitCall, SourceManager &SM)
@@ -63,7 +64,6 @@ public:
         ReturnVisitor visitor(TheRewriter, exitCall, SM);
         visitor.TraverseStmt(const_cast<Stmt*>(Body));
 
-        // If no return was found, insert exit before final closing brace
         if (!visitor.foundReturn()) {
             if (const CompoundStmt *Compound = dyn_cast<CompoundStmt>(Body)) {
                 SourceLocation EndLoc = Compound->getRBracLoc();
@@ -96,16 +96,27 @@ private:
 
 class InstrumentorFrontendAction : public ASTFrontendAction {
 public:
-    void EndSourceFileAction() override {
-        SourceManager &SM = TheRewriter.getSourceMgr();
-        llvm::errs() << "** Finished instrumenting: "
-                     << SM.getFileEntryForID(SM.getMainFileID())->getName() << "\n";
-        TheRewriter.getEditBuffer(SM.getMainFileID()).write(llvm::outs());
-    }
-
     std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI, StringRef file) override {
         TheRewriter.setSourceMgr(CI.getSourceManager(), CI.getLangOpts());
         return std::make_unique<InstrumentorASTConsumer>(TheRewriter);
+    }
+
+    void EndSourceFileAction() override {
+        SourceManager &SM = TheRewriter.getSourceMgr();
+        FileID MainFileID = SM.getMainFileID();
+        llvm::errs() << "** Finished instrumenting: "
+                     << SM.getFileEntryForID(MainFileID)->getName() << "\n";
+
+        // Inject setenv logic
+        std::string InitCode;
+        InitCode += "#include <stdlib.h>\n";
+        InitCode += "static void __init_papi_env() __attribute__((constructor));\n";
+        InitCode += "static void __init_papi_env() {\n";
+        InitCode += "  setenv(\"TRACE_PAPI_EVENTS\", \"" + TraceEvents + "\", 1);\n";
+        InitCode += "}\n\n";
+
+        TheRewriter.InsertText(SM.getLocForStartOfFile(MainFileID), InitCode, true, true);
+        TheRewriter.getEditBuffer(MainFileID).write(llvm::outs());
     }
 
 private:
@@ -118,6 +129,9 @@ int main(int argc, const char **argv) {
         llvm::errs() << ExpectedParser.takeError();
         return 1;
     }
+
+    llvm::errs() << "PAPI events set: " << TraceEvents << "\n";
+    setenv("TRACE_PAPI_EVENTS", TraceEvents.c_str(), 1);  // Optional
 
     ClangTool Tool(ExpectedParser->getCompilations(), ExpectedParser->getSourcePathList());
     return Tool.run(newFrontendActionFactory<InstrumentorFrontendAction>().get());

@@ -6,7 +6,7 @@ int square(int n) {
     int sum;
     if(n>2)
      return 0;
-    for(int i=0;i<1000;i++)
+    for(int i=0;i<2000;i++)
      sum+=0;
     return sum;
 
