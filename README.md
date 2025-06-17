@@ -46,5 +46,6 @@ To list available events:
 The output CSV (metrics.csv) will contain entries like:
 
 function_name,start_time,end_time,PAPI_TOT_INS,PAPI_L1_DCM
+
 compute,1623651123.123456789,1623651123.456789123,10231,23
 main,1623651123.457123456,1623651123.789321987,132,2
