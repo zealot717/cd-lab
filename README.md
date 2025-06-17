@@ -17,16 +17,16 @@ This project is a compiler-based toolchain for **automatically instrumenting C/C
 
 ---
 
-To Run Pipeline:
+##  To Run Pipeline:
 ./run_pipeline.sh \
   -i <input_file.c> \
   -e <event1,event2,...> \
   -o <output_file.csv>
-Flag	Description
+**Flag**	**Description**
 -i	  Input C file to instrument
 -e	  Comma-separated PAPI events to trace
 -o	  Output CSV file path (optional)
-./run_pipeline.sh -i test/sample.c -e "PAPI_TOT_INS,PAPI_L1_DCM" -o out.csv
+Eg: './run_pipeline.sh -i test/sample.c -e "PAPI_TOT_INS,PAPI_L1_DCM" -o out.csv'
 
 This will:
 
@@ -37,5 +37,5 @@ This will:
 
 
 To list available events:
-papi_avail
-papi_native_avail | grep <keyword>
+'papi_avail'
+'papi_native_avail | grep <keyword>'
