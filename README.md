@@ -22,6 +22,7 @@ This project is a compiler-based toolchain for **automatically instrumenting C/C
   -i <input_file.c> \
   -e <event1,event2,...> \
   -o <output_file.csv>
+  
 **Flag**	**Description**
 -i	  Input C file to instrument
 -e	  Comma-separated PAPI events to trace
@@ -37,5 +38,12 @@ This will:
 
 
 To list available events:
-'papi_avail'
-'papi_native_avail | grep <keyword>'
+'papi_avail' # Lists available preset PAPI events
+'papi_native_avail | grep <keyword>' # Lists native hardware-specific events
+
+---
+##  Sample Output
+The output CSV (metrics.csv) will contain entries like:
+function_name,start_time,end_time,PAPI_TOT_INS,PAPI_L1_DCM
+compute,1623651123.123456789,1623651123.456789123,10231,23
+main,1623651123.457123456,1623651123.789321987,132,2
